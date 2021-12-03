@@ -1,11 +1,21 @@
 <?php
 
-class IndexController
+class ContractsController
 {
-    public function indexAction(Request $request)
+    protected $contractsRepository;
+
+    public function __construct(ContractsRepository $contractsRepository)
     {
+        $this->contractsRepository = $contractsRepository;
+    }
+
+    public function showAction(Request $request)
+    {
+        $contracts = $this->contractsRepository->getAll();
         return new Response(
-            $this->render('mainPage')
+            $this->render('contracts', [
+                'contracts' => $contracts
+            ])
         );
     }
 
@@ -24,6 +34,4 @@ class IndexController
         return new Response('Sorry but this action not found',
             '404', 'Not found');
     }
-
-
 }

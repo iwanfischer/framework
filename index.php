@@ -1,12 +1,12 @@
 <?php
 require_once 'controllers/IndexController.php';
-require_once 'controllers/HelloWorldController.php';
+require_once 'controllers/ContractsController.php';
 
 require_once 'core/Request.php';
 require_once 'core/Response.php';
 require_once 'core/Router.php';
 
-require_once 'repositories/ArticleRepository.php';
+require_once 'repositories/ContractsRepository.php';
 
 include_once 'config/routes.php';
 include_once 'config/database.php';
@@ -20,8 +20,7 @@ $dsn = sprintf("mysql:host=%s;dbname=%s;charset=%s", $database['database_host'],
 /** @var PDO $connection */
 $connection = new PDO( $dsn, $database['username'], $database['password']);
 
-$articleRepository = new ArticleRepository($connection);
-
+$contractsRepository = new ContractsRepository($connection);
 
 try {
     $route = $router->match($request->getPath());
@@ -33,8 +32,9 @@ try {
 }
 
 $controllers = [
-    'index' => new IndexController($articleRepository),
-    'helloWorld' => new HelloWorldController(),
+    'index' => new IndexController(),
+    'contracts' => new ContractsController($contractsRepository)
+
 ];
 
 $controller = $controllers[$route['controller']];

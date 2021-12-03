@@ -5,16 +5,9 @@ $routes = [
         'controller' => 'index',
         'action' => 'index'
     ],
-    '/show' => [
-        'controller' => 'index',
+
+    '/contracts' => [
+        'controller' => 'contracts',
         'action' => 'show'
-    ],
-    '/hello' => [
-        'controller' => 'helloWorld',
-        'action' => 'hello'
-    ],
-    '/world' => [
-        'controller' => 'helloWorld',
-        'action' => 'world'
     ],
 ];
