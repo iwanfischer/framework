@@ -9,6 +9,7 @@ class IndexController
         );
     }
 
+
     protected function render($templateName, $vars = [])
     {
         ob_start();

@@ -9,6 +9,10 @@
 </head>
 <body>
 <h1>Контракты</h1>
+<a href="/create/form">Добавить новый договор</a>
+<br>
+<br>
+
 <table>
     <tr>
         <th>Номер Агента</th>
@@ -32,7 +36,8 @@
         </tr>
     <?php endforeach; ?>
 </table>
-
+<br>
+<br>
 <a href="/">На главную</a>
 </body>
 </html>

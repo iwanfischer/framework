@@ -8,6 +8,17 @@ $routes = [
 
     '/contracts' => [
         'controller' => 'contracts',
-        'action' => 'show'
+        'action' => 'contracts'
     ],
+
+    '/create/form' => [
+        'controller' => 'contracts',
+        'action' => 'createForm'
+    ],
+
+    '/create' => [
+        'controller' => 'contracts',
+        'action' => 'create'
+
+    ]
 ];

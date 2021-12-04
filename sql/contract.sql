@@ -8,7 +8,7 @@
 -- – Дата заключения <datetime> <input datetime-local> (дата создания)
 
 CREATE TABLE IF NOT EXISTS contracts (
-    id varchar (255) PRIMARY KEY,
+    id int (11) NOT NULL AUTO_INCREMENT PRIMARY KEY ,
     agent varchar (255),
     complex varchar (255),
     rewardType varchar (255) CHECK (rewardType = 'Фикс' or rewardType = 'Процент'),
@@ -19,5 +19,5 @@ CREATE TABLE IF NOT EXISTS contracts (
 
 INSERT INTO contracts (id, agent, complex, rewardType, rewardSize, validity, contractDate) VALUES ('130', 'Олег Добродушный','Скай Хаус','Фикс','100000', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 INSERT INTO contracts (id, agent, complex, rewardType, rewardSize, validity, contractDate) VALUES ('152', 'Мария Шилова','Лесной','Фикс','50000', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
-INSERT INTO contracts (id, agent, complex, rewardType, rewardSize, validity, contractDate) VALUES ('152', 'Игорь Афонин','Луч','Процент','5%', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+INSERT INTO contracts (id, agent, complex, rewardType, rewardSize, validity, contractDate) VALUES ('152', 'Игорь Афонин','Луч','Процент','5', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 

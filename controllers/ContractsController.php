@@ -9,15 +9,66 @@ class ContractsController
         $this->contractsRepository = $contractsRepository;
     }
 
-    public function showAction(Request $request)
+    public function contractsAction(Request $request)
     {
-        $contracts = $this->contractsRepository->getAll();
+        $contract = $this->contractsRepository->getAll();
         return new Response(
             $this->render('contracts', [
-                'contracts' => $contracts
+                'contracts' => $contract
             ])
         );
     }
+
+    public function showAction(Request $request)
+    {
+        $id = $request->getQueryParameter("id");
+
+        $contract = is_numeric($id) ? $this->contractsRepository->getById($id) : null;
+
+        if ($contract === null) {
+            return new Response('Page not found', '404', 'Not found');
+        }
+
+        return new Response(
+            $this->render('contracts', [
+                'contracts' => $contract
+            ])
+        );
+    }
+
+    /**
+     * Show form for new contract.
+     * @param Request $request
+     * @return Response
+     */
+    public function createFormAction(Request $request)
+    {
+        return new Response (
+            $this->render('contracts/form', [])
+        );
+
+    }
+
+    /**
+     * Add new contract
+     * @param Request $request
+     * @return Response|void
+     */
+    public function createAction($request)
+    {
+        if ($request->isPost() && !empty($request->getRequestParameter('contracts'))) {
+
+            $contracts = $request->getRequestParameter('contracts');
+
+            $this->contractsRepository->add(
+                $contracts[agent], $contracts[complex], $contracts[rewardType], $contracts[rewardSize], $contracts[validity], $contracts[contractDate]);
+
+            return new Response(
+                '/contracts', '301', 'Moved'
+            );
+        }
+    }
+
 
     protected function render($templateName, $vars = [])
     {

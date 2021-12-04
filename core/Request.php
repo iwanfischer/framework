@@ -105,5 +105,15 @@ class Request
         return isset($this->originalGet[$name]) ? $this->originalGet[$name] : null;
     }
 
+    /**
+     * Return parameter value from Post request
+     * @param $name
+     * @return mixed|null
+     */
+    public function getRequestParameter($name)
+    {
+        return isset($this->originalPost[$name]) ? $this->originalPost[$name] : null;
+    }
+
 
 }
