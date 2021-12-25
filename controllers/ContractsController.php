@@ -59,13 +59,23 @@ class ContractsController
         if ($request->isPost() && !empty($request->getRequestParameter('contracts'))) {
 
             $contracts = $request->getRequestParameter('contracts');
+            $agentsValidator = new AgentsValidator();
 
-            $this->contractsRepository->add(
-                $contracts[agent], $contracts[complex], $contracts[rewardType], $contracts[rewardSize], $contracts[validity], $contracts[contractDate]);
+            $errors = $agentsValidator->validate($contracts);
+            if (empty($errors)) {
+                $this->contractsRepository->add(
+                    $contracts[agent], $contracts[complex], $contracts[rewardType], $contracts[rewardSize], $contracts[validity], $contracts[contractDate]);
 
-            return new Response(
-                '/contracts', '301', 'Moved'
-            );
+                return new Response(
+                    '/contracts', '301', 'Moved'
+                );
+            } else {
+                return new Response (
+                    $this->render('contracts/form', [
+                        'errors' => $errors
+                    ])
+                );
+            }
         }
     }
 
